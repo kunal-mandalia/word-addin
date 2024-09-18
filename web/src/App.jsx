@@ -3,28 +3,12 @@ import './App.css'
 
 
 function App() {
-  const [accessToken, setAccessToken] = useState(null);
+  const [officeReady, setOfficeReady] = useState(false);
 
   useEffect(() => {
     Office.onReady().then(() => {
       console.log("Office is ready");
-      
-      var options = {
-        allowSignInPrompt: true,
-        allowConsentPrompt: true,
-        forMSGraphAccess: false
-      };
-      
-      Office.context.auth.getAccessToken(options, function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var accessToken = asyncResult.value;
-          // Use the access token to make authenticated requests
-          setAccessToken(accessToken);
-        } else {
-          console.error(asyncResult.error.message);
-        }
-      });
-
+      setOfficeReady(true);
     });
 
     return () => {
@@ -35,7 +19,7 @@ function App() {
   return (
     <>
       <div>
-        access token: {accessToken}
+        Office is ready: {officeReady ? "Yes" : "No"}
       </div>
     </>
   )
