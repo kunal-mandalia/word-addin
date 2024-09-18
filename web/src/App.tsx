@@ -4,7 +4,7 @@ import { Read } from './features/Read';
 
 function App() {
   const [officeReady, setOfficeReady] = useState(false);
-  const [storageValue, setStorageValue] = useState<string | null>(null);
+  const [_, setStorageValue] = useState<string | null>(null);
 
   useEffect(() => {
     Office.onReady().then(() => {
