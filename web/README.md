@@ -5,7 +5,7 @@ Spike into the capabilities and limitations of a Microsoft Word Add-in
 ## Features
 
 ### Reactive
-- [ ] read: document title, sections
+- [x] read: document title, sections
 - [ ] readwrite: citation, append
 - [ ] readwrite: citations, replace selection
 

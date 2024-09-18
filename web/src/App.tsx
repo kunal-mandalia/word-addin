@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import { Read } from './features/Read';
 
 function App() {
   const [officeReady, setOfficeReady] = useState(false);
@@ -18,23 +19,13 @@ function App() {
     }
   }, []);
 
+  if (!officeReady) {
+    return <div>Loading...</div>
+  }
+
   return (
     <>
-      <div>
-        Office is ready: {officeReady ? "Yes" : "No"}
-      </div>
-
-      <div>
-        Saved value: {storageValue}{" "}<button onClick={() => {
-          const value = new Date().toISOString();
-          localStorage.setItem("save_key", value);
-          setStorageValue(value);
-        }}>Update</button>
-      </div>
-
-      <small>
-        v2.0.0
-      </small>
+      <Read />
     </>
   )
 }
