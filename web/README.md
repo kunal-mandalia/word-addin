@@ -9,7 +9,7 @@ Spike into the capabilities and limitations of a Microsoft Word Add-in
 - [ ] readwrite: citation, append
 - [ ] readwrite: citations, replace selection
 
-### Proactive
+### Proactive
 - [ ] async: suggest improvements to content proactively
 
 ### Technical considerations
