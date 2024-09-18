@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
-
 
 function App() {
   const [officeReady, setOfficeReady] = useState(false);
@@ -21,6 +20,10 @@ function App() {
       <div>
         Office is ready: {officeReady ? "Yes" : "No"}
       </div>
+
+      <small>
+        v2.0.0
+      </small>
     </>
   )
 }
