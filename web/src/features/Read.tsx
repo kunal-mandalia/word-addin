@@ -4,10 +4,11 @@ export function Read() {
     const [title, setTitle] = useState("");
     const [selectedText, setSelectedText] = useState("");
     const [selectedParagraphText, setSelectedParagraphText] = useState("");
-    
+
     const [paragraphs, setParagraphs] = useState<Word.Paragraph[]>([]);
 
     async function syncSelection() {
+        // todo combine in one promise
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, function (asyncResult) {
             if (asyncResult.status === Office.AsyncResultStatus.Failed) {
                 console.error('Action failed. Error: ' + asyncResult.error.message);
@@ -20,7 +21,6 @@ export function Read() {
         Word.run(async (context) => {
             const selectedParagraphs = context.document.getSelection().paragraphs;
             selectedParagraphs.load("items");
-
             await context.sync();
             setSelectedParagraphText(selectedParagraphs.items.map(p => p.text).join("\n"));
         });
@@ -49,7 +49,7 @@ export function Read() {
                 document.onParagraphChanged.add(getContent);
             });
 
-            Office.context.document.addHandlerAsync(Office.EventType.DocumentSelectionChanged, syncSelection, function(result) {
+            Office.context.document.addHandlerAsync(Office.EventType.DocumentSelectionChanged, syncSelection, function (result) {
                 if (result.status === Office.AsyncResultStatus.Failed) {
                     console.error('Failed to add handler: ' + result.error.message);
                 }
@@ -61,27 +61,33 @@ export function Read() {
 
     return (
         <div>
-        <div>
-            <h2>Read</h2>
-            <h3>Title</h3>
-            <p>{title}</p>
-
-            <h3>Content</h3>
-            <pre style={{ maxHeight: 400, overflow: "scroll" }}>
-                {JSON.stringify(paragraphs, null, 4)}
-            </pre>
-
-            <h3>Context</h3>
-
-            <div>Paragraph: </div>
-            <p>{selectedParagraphText}</p>
-
-            <div>Selection: </div>
-            <p>{selectedText}</p>
-        </div>
-
             <div>
-                <button onClick={getContent}>Sync</button>
+                <h2>Read</h2>
+
+                <h3>Context</h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>paragraph: </td>
+                            <td>{selectedParagraphText}</td>
+                        </tr>
+                        <tr>
+                            <td>selection: </td>
+                            <td>{selectedText}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Title</h3>
+                <p>{title}</p>
+
+                <h3>Content</h3>
+                <pre style={{ maxHeight: 400, overflowY: "scroll", overflowX: "hidden" }}>
+                    {JSON.stringify(paragraphs, null, 4)}
+                </pre>
+                <div>
+                    <button onClick={getContent}>Sync</button>
+                </div>
             </div>
         </div>
     )
