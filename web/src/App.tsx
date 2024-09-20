@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { Read } from './features/Read';
+import { ReadWrite } from './features/ReadWrite';
 
 function App() {
   const [officeReady, setOfficeReady] = useState(false);
   const [_, setStorageValue] = useState<string | null>(null);
+  const [feature, setFeature] = useState("readwrite");
 
   useEffect(() => {
     Office.onReady().then(() => {
@@ -25,7 +27,14 @@ function App() {
 
   return (
     <>
-      <Read />
+      <select value={feature} onChange={(e) => {
+        setFeature(e.target.value);
+      }}>
+        <option value="readwrite">ReadWrite</option>
+        <option value="read">Read</option>
+      </select>
+      {feature === "readwrite" && <ReadWrite />}
+      {feature === "read" && <Read />}
     </>
   )
 }
