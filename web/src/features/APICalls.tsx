@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 export function APICalls() {
     const [data, setData] = useState<any[]>([]);
     const [debugOutput] = useState("");
-    // const [socket, setSocket] = useState<WebSocket>();
     const socket = useRef<WebSocket>();
     const listenMode = useRef<boolean>(false);
     
