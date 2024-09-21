@@ -9,13 +9,13 @@ Spike into the capabilities and limitations of a Microsoft Word Add-in
 - [x] readwrite: citation, append, replace
 
 ### Proactive
-- [ ] async: suggest improvements to content proactively
+- [x] async: suggest improvements to content proactively
 
 ### Technical considerations
-- [ ] api: websocket connection ok
+- [x] api: websocket connection ok
 - [ ] security: auth
 - [ ] deployment: strategies
-- [ ] resources: storage, lifecycle
+- [x] resources: storage, lifecycle
 
 ## Implementation
 - [ ] by core feature
