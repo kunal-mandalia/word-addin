@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import { Read } from './features/Read';
 import { ReadWrite } from './features/ReadWrite';
+import { APICalls } from './features/APICalls';
 
 function App() {
   const [officeReady, setOfficeReady] = useState(false);
@@ -32,9 +33,11 @@ function App() {
       }}>
         <option value="readwrite">ReadWrite</option>
         <option value="read">Read</option>
+        <option value="apicalls">APICalls</option>
       </select>
       {feature === "readwrite" && <ReadWrite />}
       {feature === "read" && <Read />}
+      {feature === "apicalls" && <APICalls />}
     </>
   )
 }
